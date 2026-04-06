@@ -115,3 +115,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("task-modal").close();
   };
 });
+
+// ==========================
+// DARK MODE TOGGLE
+// ==========================
+const toggle = document.getElementById("theme-toggle");
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  const isDark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+  document.body.classList.add("dark");
+}

@@ -33,6 +33,12 @@ body {
   font-size: 13px;
 }
 
+body.dark {
+  --primary-color: #2b2c37;
+  --secondary-color: #20212c;
+  --primary-font-color: #ffffff;
+}
+
 /* ================
    Sidebar Layout
 ================ */
@@ -232,6 +238,23 @@ header {
   color: #635fc7;
 }
 
+.task-div {
+  background-color: white;
+  color: black;
+}
+
+.task-div {
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+body.dark .task-div {
+  background-color: #2b2c37;
+  color: white;
+}
+
 /* ===============
    Headings
 ================ */
@@ -391,6 +414,59 @@ form select {
 
   background-size: 1.4rem;
   padding-right: 1rem;
+}
+
+/* ==========================
+   DARK MODE
+========================== */
+body.dark {
+  --primary-color: #2b2c37;
+  --secondary-color: #20212c;
+  --primary-font-color: #ffffff;
+  --secondary-font-color: #828fa3;
+}
+
+/* smoother transition */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================
+   THEME TOGGLE
+========================== */
+.theme-toggle-container {
+  margin-top: auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 20px;
+  background-color: #635fc7;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.toggle-circle {
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+
+body.dark .toggle-circle {
+  transform: translateX(20px);
 }
 
 /* ========================
