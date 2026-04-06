@@ -45,10 +45,15 @@ body.dark {
 .side-bar {
   display: flex;
   flex-direction: column;
-  background-color: var(--primary-color);
-  border-right: 1px solid #e4ebfa; /* Light divider */
+  justify-content: space-between;
+
   width: var(--sidebar-width);
-  height: 100vh;
+  height: 100vh;             
+  background-color: var(--primary-color);
+}
+
+.sidebar-bottom {
+  padding: 20px;
 }
 
 #side-logo-div {
@@ -435,12 +440,14 @@ body {
    THEME TOGGLE
 ========================== */
 .theme-toggle-container {
-  margin-top: auto;
-  padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; 
+
+  gap: 10px;
+
   background-color: var(--secondary-color);
+  padding: 10px;
   border-radius: 8px;
 }
 

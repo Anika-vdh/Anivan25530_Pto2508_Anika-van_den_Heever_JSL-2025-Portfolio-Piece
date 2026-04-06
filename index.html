@@ -19,25 +19,37 @@
 
   <!-- SIDEBAR -->
   <nav class="side-bar">
-    <div id="side-logo-div">
-      <img id="logo" src="./assets/logo-light.svg" />
+
+    <!-- TOP SECTION -->
+    <div>
+      <div id="side-logo-div">
+        <img id="logo" src="./assets/logo-light.svg" />
+      </div>
+
+      <div class="boards-nav-links-div">
+        <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+        <button class="board-btn">Launch Career</button>
+      </div>
     </div>
 
-    <div class="boards-nav-links-div">
-      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
-      <button class="board-btn">Launch Career</button>
+    <!-- BOTTOM SECTION -->
+    <div class="sidebar-bottom">
+
+      <div class="theme-toggle-container">
+        <span>🌞</span>
+
+        <div class="theme-toggle" id="theme-toggle">
+          <div class="toggle-circle"></div>
+        </div>
+
+        <span>🌙</span>
+      </div>
+
+      <button class="hide-sidebar-btn">Hide Sidebar</button>
+
     </div>
+
   </nav>
-
-  <div class="theme-toggle-container">
-  <span>🌞</span>
-
-  <div class="theme-toggle" id="theme-toggle">
-    <div class="toggle-circle"></div>
-  </div>
-
-  <span>🌙</span>
-</div>
 
   <!-- MAIN LAYOUT -->
   <div id="layout">
@@ -56,26 +68,29 @@
     <div class="container">
       <main class="card-column-main">
 
+        <!-- TODO -->
         <div class="column-div" data-status="todo">
           <div class="column-head-div">
             <span class="dot" id="todo-dot"></span>
-            <h4 class="columnHeader">TODO</h4>
+            <h4 class="columnHeader">TODO (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
 
+        <!-- DOING -->
         <div class="column-div" data-status="doing">
           <div class="column-head-div">
             <span class="dot" id="doing-dot"></span>
-            <h4 class="columnHeader">DOING</h4>
+            <h4 class="columnHeader">DOING (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
 
+        <!-- DONE -->
         <div class="column-div" data-status="done">
           <div class="column-head-div">
             <span class="dot" id="done-dot"></span>
-            <h4 class="columnHeader">DONE</h4>
+            <h4 class="columnHeader">DONE (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -88,11 +103,19 @@
   <!-- ADD TASK MODAL -->
   <dialog class="modal-overlay">
     <form class="modal-window" id="new-task-modal-window">
-      <h3>Add New Task</h3>
 
-      <input id="title-input" placeholder="Title" required />
-      <textarea id="desc-input" placeholder="Description"></textarea>
+      <div class="modal-header">
+        <h3>Add New Task</h3>
+        <span class="close-btn" id="cancel-add-btn">&times;</span>
+      </div>
 
+      <label>Title</label>
+      <input id="title-input" placeholder="e.g. Take a little break" required />
+
+      <label>Description</label>
+      <textarea id="desc-input"></textarea>
+
+      <label>Status</label>
       <select id="select-status">
         <option value="todo">todo</option>
         <option value="doing">doing</option>
@@ -100,6 +123,7 @@
       </select>
 
       <input type="submit" value="Create Task" class="submit-btn" />
+
     </form>
   </dialog>
 
