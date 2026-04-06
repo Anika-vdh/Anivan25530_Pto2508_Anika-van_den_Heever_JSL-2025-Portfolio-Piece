@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="./scripts/main.js"></script>
+
+  <title>Kanban Task Management</title>
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="side-bar">
+    <div id="side-logo-div">
+      <img id="logo" src="./assets/logo-light.svg" />
+    </div>
+
+    <div class="boards-nav-links-div">
+      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+      <button class="board-btn">Launch Career</button>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <div id="layout">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-name-div">
+        <img src="./assets/favicon.svg" class="logo-mobile" />
+        <h2 id="header-board-name">Launch Career</h2>
+      </div>
+
+      <button id="add-new-task-btn">+ Add New Task</button>
+    </header>
+
+    <!-- BOARD -->
+    <div class="container">
+      <main class="card-column-main">
+
+        <div class="column-div" data-status="todo">
+          <div class="column-head-div">
+            <span class="dot" id="todo-dot"></span>
+            <h4 class="columnHeader">TODO</h4>
+          </div>
+          <div class="tasks-container"></div>
+        </div>
+
+        <div class="column-div" data-status="doing">
+          <div class="column-head-div">
+            <span class="dot" id="doing-dot"></span>
+            <h4 class="columnHeader">DOING</h4>
+          </div>
+          <div class="tasks-container"></div>
+        </div>
+
+        <div class="column-div" data-status="done">
+          <div class="column-head-div">
+            <span class="dot" id="done-dot"></span>
+            <h4 class="columnHeader">DONE</h4>
+          </div>
+          <div class="tasks-container"></div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- ADD TASK MODAL -->
+  <dialog class="modal-overlay">
+    <form class="modal-window" id="new-task-modal-window">
+      <h3>Add New Task</h3>
+
+      <input id="title-input" placeholder="Title" required />
+      <textarea id="desc-input" placeholder="Description"></textarea>
+
+      <select id="select-status">
+        <option value="todo">todo</option>
+        <option value="doing">doing</option>
+        <option value="done">done</option>
+      </select>
+
+      <input type="submit" value="Create Task" class="submit-btn" />
+    </form>
+  </dialog>
+
+  <!-- EDIT TASK MODAL -->
+  <dialog id="task-modal">
+    <form method="dialog" id="task-form">
+
+      <div class="modal-header">
+        <h3>Task</h3>
+        <button type="button" class="close-btn" id="close-modal-btn">
+          &times;
+        </button>
+      </div>
+
+      <label>Title</label>
+      <input id="task-title" required />
+
+      <label>Status</label>
+      <select id="task-status">
+        <option value="todo">todo</option>
+        <option value="doing">doing</option>
+        <option value="done">done</option>
+      </select>
+
+      <button type="submit" class="submit-btn">Save Changes</button>
+      <button type="button" id="delete-task-btn">Delete Task</button>
+
+    </form>
+  </dialog>
+
+</body>
+</html>
