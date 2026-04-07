@@ -67,6 +67,7 @@ function openModal(task) {
 
   document.getElementById("task-title").value = task.title;
   document.getElementById("task-status").value = task.status;
+  document.getElementById("task-desc").value = task.description || "";
 
   currentTaskId = task.id;
 
@@ -147,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const titleInput = document.getElementById("task-title");
     const statusSelect = document.getElementById("task-status");
+    const descInput = document.getElementById("task-desc");
 
     let tasks = loadTasks();
 
@@ -155,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return {
           ...task,
           title: titleInput.value,
+          description: descInput.value,
           status: statusSelect.value
         };
       }
@@ -186,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================
-  // CLOSE EDIT MODAL (X BUTTON)
+  // CLOSE EDIT MODAL (X)
   // ==========================
   const closeModalBtn = document.getElementById("close-modal-btn");
   const taskModal = document.getElementById("task-modal");
@@ -221,13 +224,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================
-  // HIDE SIDEBAR
+  // SIDEBAR TOGGLE
   // ==========================
   const hideBtn = document.querySelector(".hide-sidebar-btn");
   const sidebar = document.querySelector(".side-bar");
 
   hideBtn.addEventListener("click", () => {
-    sidebar.style.display = "none";
+    sidebar.classList.toggle("hidden");
   });
 
 });

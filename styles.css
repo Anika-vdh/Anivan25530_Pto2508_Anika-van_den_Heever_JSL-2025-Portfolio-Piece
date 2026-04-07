@@ -434,6 +434,7 @@ select {
   border-radius: 6px;
   border: 1px solid #828fa3;
   font-size: 14px;
+  width: 100%;
 }
 
 form select {
@@ -610,4 +611,8 @@ body.dark .toggle-circle {
 .task-div {
   position: relative;
   z-index: 1;
+}
+
+.side-bar.hidden {
+  display: none;
 }
