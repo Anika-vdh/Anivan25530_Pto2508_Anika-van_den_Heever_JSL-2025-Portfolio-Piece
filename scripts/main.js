@@ -1,136 +1,159 @@
+// ==========================
+// GLOBAL STATE
+// ==========================
 let currentTaskId = null;
 
 // ==========================
-// RENDER
-// ==========================
-function renderTasks(tasks) {
-  document.querySelectorAll(".tasks-container").forEach(c => c.innerHTML = "");
-
-  tasks.forEach(task => {
-    const div = document.createElement("div");
-    div.className = "task-div";
-    div.textContent = task.title;
-
-    div.onclick = () => openModal(task);
-
-    const column = document.querySelector(
-      `.column-div[data-status="${task.status}"] .tasks-container`
-    );
-
-    column.appendChild(div);
-  });
-}
-
-// ==========================
-// OPEN MODAL
-// ==========================
-function openModal(task) {
-  currentTaskId = task.id;
-
-  document.getElementById("task-title").value = task.title;
-  document.getElementById("task-status").value = task.status;
-
-  document.getElementById("task-modal").showModal();
-}
-
-// ==========================
-// STORAGE
+// LOCAL STORAGE
 // ==========================
 function saveTasks(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function loadTasks() {
-  return JSON.parse(localStorage.getItem("tasks")) || [];
+  const data = localStorage.getItem("tasks");
+  return data ? JSON.parse(data) : [];
 }
 
 // ==========================
-// INIT
+// RENDER TASKS
+// ==========================
+function renderTasks(tasks) {
+  document.querySelectorAll(".tasks-container").forEach(container => {
+    container.innerHTML = "";
+  });
+
+  tasks.forEach(task => {
+    const div = document.createElement("div");
+    div.className = "task-div";
+    div.textContent = task.title;
+
+    const column = document.querySelector(
+      `.column-div[data-status="${task.status}"] .tasks-container`
+    );
+
+    if (column) {
+      column.appendChild(div);
+    }
+  });
+}
+
+// ==========================
+// UPDATE COUNTS
+// ==========================
+function updateCounts(tasks) {
+  const statuses = ["todo", "doing", "done"];
+
+  statuses.forEach(status => {
+    const count = tasks.filter(t => t.status === status).length;
+
+    const header = document.querySelector(
+      `.column-div[data-status="${status}"] .columnHeader`
+    );
+
+    if (header) {
+      header.textContent = `${status.toUpperCase()} (${count})`;
+    }
+  });
+}
+
+// ==========================
+// INIT APP
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
+
   let tasks = loadTasks();
 
-  if (tasks.length === 0) {
+  if (!Array.isArray(tasks) || tasks.length === 0) {
     tasks = [
       { id: 1, title: "Launch Epic Career 🚀", status: "todo" },
       { id: 2, title: "Conquer React ⚛️", status: "todo" },
-      { id: 3, title: "Master JavaScript 💛", status: "doing" },
-      { id: 4, title: "Explore ES6 Features 🚀", status: "done" }
+      { id: 3, title: "Understand Databases ⚙️", status: "todo" },
+      { id: 4, title: "Crush Frameworks 🖼️", status: "todo" },
+      { id: 5, title: "Master JavaScript 💛", status: "doing" },
+      { id: 6, title: "Never Give Up 🏆", status: "doing" },
+      { id: 7, title: "Explore ES6 Features 🚀", status: "done" },
+      { id: 8, title: "Have fun 🥳", status: "done" }
     ];
+
     saveTasks(tasks);
   }
 
   renderTasks(tasks);
+  updateCounts(tasks);
 
-  // OPEN NEW TASK MODAL
-  document.getElementById("add-new-task-btn").onclick = () => {
-    document.querySelector(".modal-overlay").showModal();
-  };
+  // ==========================
+  // ADD TASK
+  // ==========================
+  const addBtn = document.getElementById("add-new-task-btn");
+  const newTaskModal = document.querySelector(".modal-overlay");
 
-  // CREATE TASK
-  document.getElementById("new-task-modal-window").onsubmit = (e) => {
+  addBtn.addEventListener("click", () => {
+    newTaskModal.showModal();
+  });
+
+  const newTaskForm = document.getElementById("new-task-modal-window");
+
+  newTaskForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    const titleInput = document.getElementById("title-input");
+    const descInput = document.getElementById("desc-input");
+    const statusSelect = document.getElementById("select-status");
 
     let tasks = loadTasks();
 
-    tasks.push({
+    const newTask = {
       id: Date.now(),
-      title: document.getElementById("title-input").value,
-      status: document.getElementById("select-status").value
-    });
+      title: titleInput.value,
+      description: descInput.value,
+      status: statusSelect.value
+    };
+
+    tasks.push(newTask);
 
     saveTasks(tasks);
     renderTasks(tasks);
+    updateCounts(tasks);
 
-    document.querySelector(".modal-overlay").close();
-  };
+    newTaskForm.reset();
+    newTaskModal.close();
+  });
 
-  // EDIT TASK
-  document.getElementById("task-form").onsubmit = (e) => {
-    e.preventDefault();
+  // ==========================
+  // DARK MODE
+  // ==========================
+  const toggle = document.getElementById("theme-toggle");
 
-    let tasks = loadTasks();
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+  }
 
-    tasks = tasks.map(t =>
-      t.id === currentTaskId
-        ? { ...t, title: task-title.value, status: task-status.value }
-        : t
-    );
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
 
-    saveTasks(tasks);
-    renderTasks(tasks);
+    const isDark = document.body.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
 
-    document.getElementById("task-modal").close();
-  };
+  // ==========================
+  // HIDE SIDEBAR
+  // ==========================
+  const hideBtn = document.querySelector(".hide-sidebar-btn");
+  const sidebar = document.querySelector(".side-bar");
 
-  // DELETE TASK
-  document.getElementById("delete-task-btn").onclick = () => {
-    let tasks = loadTasks();
+  hideBtn.addEventListener("click", () => {
+    sidebar.style.display = "none";
+  });
 
-    tasks = tasks.filter(t => t.id !== currentTaskId);
+  // ==========================
+  // CLOSE MODAL
+  // ==========================
+  const cancelAddBtn = document.getElementById("cancel-add-btn");
 
-    saveTasks(tasks);
-    renderTasks(tasks);
+  cancelAddBtn.addEventListener("click", () => {
+    newTaskModal.close();
+  });
 
-    document.getElementById("task-modal").close();
-  };
 });
-
-// ==========================
-// DARK MODE TOGGLE
-// ==========================
-const toggle = document.getElementById("theme-toggle");
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  const isDark = document.body.classList.contains("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
-
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "dark") {
-  document.body.classList.add("dark");
-}
+localStorage.removeItem("tasks")
