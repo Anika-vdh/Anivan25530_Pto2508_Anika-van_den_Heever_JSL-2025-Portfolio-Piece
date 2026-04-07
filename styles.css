@@ -79,35 +79,67 @@ body.dark {
 h4 {
   color: var(--secondary-font-color);
   font-size: 0.75rem;
-  letter-spacing: 0.125rem; /* Makes heading more spaced */
+  letter-spacing: 0.125rem;
 }
 
 .board-btn {
   font-family: inherit;
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between icon and text */
+  gap: 10px; 
   background-color: #635fc7;
   color: #fff;
   border: none;
-  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  border-radius: 0 100px 100px 0; 
   height: 48px;
   width: 276px;
   padding: 28px 12px 28px 50px;
   font-size: 0.9375rem;
   font-weight: bold;
   cursor: pointer;
-  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  overflow: hidden; 
+}
+
+/* ==========================
+   HIDE SIDEBAR BUTTON
+========================== */
+.hide-sidebar-btn {
+  width: 100%;
+  margin-top: 15px;
+
+  background-color: #f4f7fd;
+  color: #828fa3;
+
+  border: none;
+  border-radius: 24px;
+
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hide-sidebar-btn:hover {
+  background-color: #e4ebfa;
 }
 
 /* ===============
    Main Layout
 ================ */
 #layout {
-  flex: 1; /* Fills remaining space beside sidebar */
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  flex: 1; 
+  overflow-x: hidden; 
   width: 100%;
 }
+
+
 
 /* ===============
    Header Section
@@ -124,6 +156,7 @@ header {
   width: 100%;
   font-size: 1.875rem;
   font-weight: 600;
+ box-sizing: border-box;
 }
 
 .header-name-div {
@@ -157,25 +190,20 @@ header {
 .container {
   display: flex;
   flex-direction: column;
-  padding-left: 35px;
+  padding: 24px; 
   box-sizing: border-box;
 }
 
 .card-column-main {
   display: grid;
-  grid-template-columns: repeat(
-    3,
-    minmax(0, 304px)
-  ); /* 3 columns with min size */
-  gap: 8px; /* Space between columns */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .column-div {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 12px;
 }
 
 .column-head-div {
@@ -218,41 +246,28 @@ header {
   display: flex;
   flex-direction: column;
 }
-
 .task-div {
   display: flex;
   align-items: center;
-  padding-left: 15px;
-  width: 100%;
-  height: 60px;
+
+  padding: 16px;
+  margin-bottom: 20px;
+
   background-color: var(--primary-color);
   color: var(--primary-font-color);
+
   border-radius: 12px;
   box-shadow: var(--primary-box-shadow);
-  cursor: pointer; /* Indicate it's clickable */
-  margin-bottom: 20px;
+
+  cursor: pointer;
   font-size: 0.9375rem;
   font-weight: bold;
-}
 
-.task-div {
   transition: 0.2s ease;
 }
 
 .task-div:hover {
   color: #635fc7;
-}
-
-.task-div {
-  background-color: white;
-  color: black;
-}
-
-.task-div {
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 body.dark .task-div {
