@@ -27,7 +27,9 @@ function renderTasks(tasks) {
     const div = document.createElement("div");
     div.className = "task-div";
     div.textContent = task.title;
-
+    div.addEventListener("click", () => {
+     openModal(task);
+});
     const column = document.querySelector(
       `.column-div[data-status="${task.status}"] .tasks-container`
     );
@@ -57,6 +59,19 @@ function updateCounts(tasks) {
   });
 }
 
+function openModal(task) {
+  const modal = document.getElementById("task-modal");
+  const titleInput = document.getElementById("task-title");
+  const statusSelect = document.getElementById("task-status");
+
+  currentTaskId = task.id;
+
+  titleInput.value = task.title;
+  statusSelect.value = task.status;
+
+  modal.showModal();
+}
+
 // ==========================
 // INIT APP
 // ==========================
@@ -77,6 +92,47 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     saveTasks(tasks);
+
+    const form = document.getElementById("task-form");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const titleInput = document.getElementById("task-title");
+  const statusSelect = document.getElementById("task-status");
+
+  let tasks = loadTasks();
+
+  tasks = tasks.map(task => {
+    if (task.id === currentTaskId) {
+      return {
+        ...task,
+        title: titleInput.value,
+        status: statusSelect.value
+      };
+    }
+    return task;
+  });
+
+  saveTasks(tasks);
+  renderTasks(tasks);
+  updateCounts(tasks);
+
+  document.getElementById("task-modal").close();
+});
+const deleteBtn = document.getElementById("delete-task-btn");
+
+deleteBtn.addEventListener("click", () => {
+  let tasks = loadTasks();
+
+  tasks = tasks.filter(task => task.id !== currentTaskId);
+
+  saveTasks(tasks);
+  renderTasks(tasks);
+  updateCounts(tasks);
+
+  document.getElementById("task-modal").close();
+});
   }
 
   renderTasks(tasks);
