@@ -133,6 +133,12 @@ deleteBtn.addEventListener("click", () => {
 
   document.getElementById("task-modal").close();
 });
+const closeModalBtn = document.getElementById("close-modal-btn");
+const taskModal = document.getElementById("task-modal");
+
+closeModalBtn.addEventListener("click", () => {
+  taskModal.close();
+});
   }
 
   renderTasks(tasks);
