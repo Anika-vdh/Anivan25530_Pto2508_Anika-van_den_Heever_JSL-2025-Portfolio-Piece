@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600&display=swap"
-    rel="stylesheet"
-  />
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600&display=swap" rel="stylesheet"/>
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
 
   <link rel="stylesheet" href="./styles.css" />
-  <script defer src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
 
   <title>Kanban Task Management</title>
 </head>
@@ -22,7 +23,7 @@
 
     <!-- LOGO -->
     <div id="side-logo-div">
-      <img id="logo" src="./assets/logo-light.svg" alt="logo" />
+      <img id="logo" src="./assets/logo-light.svg" alt="kanban logo" />
     </div>
 
     <!-- BOARDS -->
@@ -46,12 +47,12 @@
 
   </nav>
 
-  <!--  SHOW SIDEBAR BUTTON -->
-<button id="show-sidebar-btn" class="show-sidebar-tab">
-  👀
-</button>
+  <!-- SHOW SIDEBAR BUTTON -->
+  <button id="show-sidebar-btn" class="show-sidebar-tab">
+    👀
+  </button>
 
-  <!-- MAIN LAYOUT -->
+  <!-- MAIN -->
   <div id="layout">
 
     <!-- HEADER -->
@@ -68,7 +69,6 @@
     <div class="container">
       <main class="card-column-main">
 
-        <!-- TODO -->
         <div class="column-div" data-status="todo">
           <div class="column-head-div">
             <span class="dot" id="todo-dot"></span>
@@ -77,7 +77,6 @@
           <div class="tasks-container"></div>
         </div>
 
-        <!-- DOING -->
         <div class="column-div" data-status="doing">
           <div class="column-head-div">
             <span class="dot" id="doing-dot"></span>
@@ -86,7 +85,6 @@
           <div class="tasks-container"></div>
         </div>
 
-        <!-- DONE -->
         <div class="column-div" data-status="done">
           <div class="column-head-div">
             <span class="dot" id="done-dot"></span>
@@ -106,21 +104,14 @@
 
       <div class="modal-header">
         <h3>Add New Task</h3>
-        <span class="close-btn" id="cancel-add-btn">&times;</span>
+        <button type="button" class="close-btn" id="cancel-add-btn">&times;</button>
       </div>
 
       <label>Title</label>
-      <input 
-        id="title-input" 
-        placeholder="e.g. Take a little break" 
-        required 
-      />
+      <input id="title-input" placeholder="e.g. Take a little break" required />
 
       <label>Description</label>
-      <textarea 
-        id="desc-input"
-        placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
-      ></textarea>
+      <textarea id="desc-input" placeholder="e.g. Take a breather and come back refreshed."></textarea>
 
       <label>Status</label>
       <select id="select-status">
@@ -140,19 +131,16 @@
 
       <div class="modal-header">
         <h3>Task</h3>
-        <button type="button" class="close-btn" id="close-modal-btn">
-          &times;
-        </button>
+        <button type="button" class="close-btn" id="close-modal-btn">&times;</button>
       </div>
 
       <label>Title</label>
       <input id="task-title" required />
 
       <label>Description</label>
-      <textarea 
-        id="task-desc"
-        placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
-      ></textarea>
+      <textarea id="task-desc"
+        placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.">
+      </textarea>
 
       <label>Status</label>
       <select id="task-status">

@@ -1,97 +1,23 @@
-// ==========================
-// GLOBAL STATE
-// ==========================
-let currentTaskId = null;
+import { loadTasks, saveTasks } from "./localStorage.js";
+import { renderTasks } from "./render.js";
 
-// ==========================
-// LOCAL STORAGE
-// ==========================
-function saveTasks(tasks) {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-function loadTasks() {
-  const data = localStorage.getItem("tasks");
-  return data ? JSON.parse(data) : [];
-}
-
-// ==========================
-// RENDER TASKS
-// ==========================
-function renderTasks(tasks) {
-  document.querySelectorAll(".tasks-container").forEach(container => {
-    container.innerHTML = "";
-  });
-
-  tasks.forEach(task => {
-    const div = document.createElement("div");
-    div.className = "task-div";
-    div.textContent = task.title;
-
-    div.addEventListener("click", () => openModal(task));
-
-    const column = document.querySelector(
-      `.column-div[data-status="${task.status}"] .tasks-container`
-    );
-
-    if (column) {
-      column.appendChild(div);
-    }
-  });
-}
-
-// ==========================
-// UPDATE COUNTS
-// ==========================
-function updateCounts(tasks) {
-  const statuses = ["todo", "doing", "done"];
-
-  statuses.forEach(status => {
-    const count = tasks.filter(t => t.status === status).length;
-
-    const header = document.querySelector(
-      `.column-div[data-status="${status}"] .columnHeader`
-    );
-
-    if (header) {
-      header.textContent = `${status.toUpperCase()} (${count})`;
-    }
-  });
-}
-
-// ==========================
-// OPEN EDIT MODAL
-// ==========================
-function openModal(task) {
-  const modal = document.getElementById("task-modal");
-
-  document.getElementById("task-title").value = task.title;
-  document.getElementById("task-status").value = task.status;
-  document.getElementById("task-desc").value = task.description || "";
-
-  currentTaskId = task.id;
-
-  modal.showModal();
-}
-
-// ==========================
-// INIT APP
-// ==========================
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ==========================
+  // LOAD TASKS
+  // ==========================
   let tasks = loadTasks();
 
-  // Seed data if empty
   if (!Array.isArray(tasks) || tasks.length === 0) {
     tasks = [
-      { id: 1, title: "Launch Epic Career 🚀", status: "todo" },
-      { id: 2, title: "Conquer React ⚛️", status: "todo" },
-      { id: 3, title: "Understand Databases ⚙️", status: "todo" },
-      { id: 4, title: "Crush Frameworks 🖼️", status: "todo" },
-      { id: 5, title: "Master JavaScript 💛", status: "doing" },
-      { id: 6, title: "Never Give Up 🏆", status: "doing" },
-      { id: 7, title: "Explore ES6 Features 🚀", status: "done" },
-      { id: 8, title: "Have fun 🥳", status: "done" }
+      { id: 1, title: "Launch Epic Career 🚀", description: "", status: "todo" },
+      { id: 2, title: "Conquer React ⚛️", description: "", status: "todo" },
+      { id: 3, title: "Understand Databases ⚙️", description: "", status: "todo" },
+      { id: 4, title: "Crush Frameworks 🖼️", description: "", status: "todo" },
+      { id: 5, title: "Master JavaScript 💛", description: "", status: "doing" },
+      { id: 6, title: "Never Give Up 🏆", description: "", status: "doing" },
+      { id: 7, title: "Explore ES6 Features 🚀", description: "", status: "done" },
+      { id: 8, title: "Have fun 🥳", description: "", status: "done" }
     ];
 
     saveTasks(tasks);
@@ -101,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCounts(tasks);
 
   // ==========================
-  // ADD TASK
+  // ADD TASK MODAL
   // ==========================
   const addBtn = document.getElementById("add-new-task-btn");
   const newTaskModal = document.querySelector(".modal-overlay");
@@ -110,22 +36,30 @@ document.addEventListener("DOMContentLoaded", () => {
     newTaskModal.showModal();
   });
 
+  const cancelAddBtn = document.getElementById("cancel-add-btn");
+  cancelAddBtn.addEventListener("click", () => {
+    newTaskModal.close();
+  });
+
+  // ==========================
+  // CREATE TASK
+  // ==========================
   const newTaskForm = document.getElementById("new-task-modal-window");
 
   newTaskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const titleInput = document.getElementById("title-input");
-    const descInput = document.getElementById("desc-input");
-    const statusSelect = document.getElementById("select-status");
+    const title = document.getElementById("title-input").value;
+    const description = document.getElementById("desc-input").value;
+    const status = document.getElementById("select-status").value;
 
     let tasks = loadTasks();
 
     const newTask = {
       id: Date.now(),
-      title: titleInput.value,
-      description: descInput.value,
-      status: statusSelect.value
+      title,
+      description,
+      status
     };
 
     tasks.push(newTask);
@@ -139,16 +73,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================
-  // EDIT TASK
+  // EDIT TASK MODAL
   // ==========================
-  const editForm = document.getElementById("task-form");
+  const taskModal = document.getElementById("task-modal");
+  const taskForm = document.getElementById("task-form");
 
-  editForm.addEventListener("submit", (e) => {
+  const taskTitle = document.getElementById("task-title");
+  const taskDesc = document.getElementById("task-desc");
+  const taskStatus = document.getElementById("task-status");
+  const deleteBtn = document.getElementById("delete-task-btn");
+  const closeModalBtn = document.getElementById("close-modal-btn");
+
+  let currentTaskId = null;
+
+  window.openModal = function (task) {
+    currentTaskId = task.id;
+
+    taskTitle.value = task.title;
+    taskDesc.value = task.description || "";
+    taskStatus.value = task.status;
+
+    taskModal.showModal();
+  };
+
+  closeModalBtn.addEventListener("click", () => {
+    taskModal.close();
+  });
+
+  // ==========================
+  // SAVE EDIT
+  // ==========================
+  taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const titleInput = document.getElementById("task-title");
-    const statusSelect = document.getElementById("task-status");
-    const descInput = document.getElementById("task-desc");
 
     let tasks = loadTasks();
 
@@ -156,9 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (task.id === currentTaskId) {
         return {
           ...task,
-          title: titleInput.value,
-          description: descInput.value,
-          status: statusSelect.value
+          title: taskTitle.value,
+          description: taskDesc.value,
+          status: taskStatus.value
         };
       }
       return task;
@@ -168,14 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTasks(tasks);
     updateCounts(tasks);
 
-    document.getElementById("task-modal").close();
+    taskModal.close();
   });
 
   // ==========================
   // DELETE TASK
   // ==========================
-  const deleteBtn = document.getElementById("delete-task-btn");
-
   deleteBtn.addEventListener("click", () => {
     let tasks = loadTasks();
 
@@ -185,59 +139,64 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTasks(tasks);
     updateCounts(tasks);
 
-    document.getElementById("task-modal").close();
-  });
-
-  // ==========================
-  // CLOSE EDIT MODAL (X)
-  // ==========================
-  const closeModalBtn = document.getElementById("close-modal-btn");
-  const taskModal = document.getElementById("task-modal");
-
-  closeModalBtn.addEventListener("click", () => {
     taskModal.close();
   });
 
   // ==========================
-  // CLOSE ADD MODAL
+  // UPDATE COUNTS
   // ==========================
-  const cancelAddBtn = document.getElementById("cancel-add-btn");
+  function updateCounts(tasks) {
+    const statuses = ["todo", "doing", "done"];
 
-  cancelAddBtn.addEventListener("click", () => {
-    newTaskModal.close();
-  });
+    statuses.forEach(status => {
+      const count = tasks.filter(t => t.status === status).length;
+
+      const column = document.querySelector(
+        `.column-div[data-status="${status}"] .columnHeader`
+      );
+
+      column.textContent = `${status.toUpperCase()} (${count})`;
+    });
+  }
 
   // ==========================
-  // DARK MODE
+  // THEME TOGGLE + LOGO
   // ==========================
   const toggle = document.getElementById("theme-toggle");
+  const logo = document.getElementById("logo");
 
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
+    logo.src = "./assets/logo-dark.svg";
   }
 
   toggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
 
     const isDark = document.body.classList.contains("dark");
+
     localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    logo.src = isDark
+      ? "./assets/logo-dark.svg"
+      : "./assets/logo-light.svg";
   });
 
   // ==========================
   // SIDEBAR TOGGLE
   // ==========================
   const hideBtn = document.querySelector(".hide-sidebar-btn");
+  const showBtn = document.getElementById("show-sidebar-btn");
   const sidebar = document.querySelector(".side-bar");
-const showBtn = document.getElementById("show-sidebar-btn");
 
-hideBtn.addEventListener("click", () => {
-  sidebar.classList.add("hidden");
-  showBtn.style.display = "block";
-});
+  hideBtn.addEventListener("click", () => {
+    sidebar.classList.add("hidden");
+    showBtn.style.display = "block";
+  });
 
-showBtn.addEventListener("click", () => {
-  sidebar.classList.remove("hidden");
-  showBtn.style.display = "none";
-});
+  showBtn.addEventListener("click", () => {
+    sidebar.classList.remove("hidden");
+    showBtn.style.display = "none";
+  });
 
 });

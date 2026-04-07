@@ -126,7 +126,8 @@ h4 {
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  text-align: center;
   gap: 8px;
 }
 
@@ -420,7 +421,7 @@ dialog {
 /* Form elements */
 form label {
   display: block;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.75em;
   margin-top: 16px;  
   margin-bottom: 6px;
@@ -433,12 +434,16 @@ select {
   padding: 12px;
   border-radius: 6px;
   border: 1px solid #828fa3;
-  font-size: 14px;
+
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px; 
+  font-weight: 500; 
+
   width: 100%;
 }
 
 form select {
-  appearance: none; /* Remove native arrow */
+  appearance: none; 
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23828FA3" stroke-width="3" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>')
     no-repeat right 0.75rem center;
 
@@ -461,12 +466,20 @@ body.dark #task-modal {
   color: white;
 }
 
-body.dark input,
-body.dark textarea,
-body.dark select {
-  background-color: #20212c;
+body.dark .modal-window {
+  background-color: #2b2c37;
   color: white;
-  border: 1px solid #3e3f4e;
+}
+
+body.dark .modal-window input,
+body.dark .modal-window textarea,
+body.dark .modal-window select,
+body.dark #task-modal input,
+body.dark #task-modal textarea,
+body.dark #task-modal select {
+  background: #ffffff;
+  color: #000000;
+  border: none;
 }
 
 /* smoother transition */
