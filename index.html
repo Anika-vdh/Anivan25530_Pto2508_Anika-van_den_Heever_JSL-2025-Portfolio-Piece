@@ -17,48 +17,47 @@
 
 <body>
 
- <!-- SIDEBAR -->
-<nav class="side-bar">
+  <!-- SIDEBAR -->
+  <nav class="side-bar">
 
-  <!-- LOGO -->
-  <div id="side-logo-div">
-    <img id="logo" src="./assets/logo-light.svg" alt="logo" />
-  </div>
+    <!-- LOGO -->
+    <div id="side-logo-div">
+      <img id="logo" src="./assets/logo-light.svg" alt="logo" />
+    </div>
 
-  <!-- BOARDS -->
-  <div class="boards-nav-links-div">
-    <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
-    <button class="board-btn">Launch Career</button>
-  </div>
+    <!-- BOARDS -->
+    <div class="boards-nav-links-div">
+      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+      <button class="board-btn">Launch Career</button>
+    </div>
 
-  <!-- BOTTOM -->
-  <div class="sidebar-bottom">
-    <div class="theme-toggle-container">
-      🌞
-      <div class="theme-toggle" id="theme-toggle">
-        <div class="toggle-circle"></div>
+    <!-- BOTTOM -->
+    <div class="sidebar-bottom">
+      <div class="theme-toggle-container">
+        🌞
+        <div class="theme-toggle" id="theme-toggle">
+          <div class="toggle-circle"></div>
+        </div>
+        🌙
       </div>
-      🌙
+
+      <button class="hide-sidebar-btn">🚫 Hide Sidebar</button>
     </div>
 
-    <button class="hide-sidebar-btn">🚫 Hide Sidebar</button>
-  </div>
+  </nav>
 
-</nav>
+  <!-- MAIN LAYOUT -->
+  <div id="layout">
 
+    <!-- HEADER -->
+    <header>
+      <div class="header-name-div">
+        <img src="./assets/favicon.svg" class="logo-mobile" />
+        <h2 id="header-board-name">Launch Career</h2>
+      </div>
 
-<!-- MAIN LAYOUT -->
-<div id="layout">
-
-  <!-- HEADER -->
-  <header>
-    <div class="header-name-div">
-      <img src="./assets/favicon.svg" class="logo-mobile" />
-      <h2 id="header-board-name">Launch Career</h2>
-    </div>
-
-    <button id="add-new-task-btn">+ Add New Task</button>
-  </header>
+      <button id="add-new-task-btn">+ Add New Task</button>
+    </header>
 
     <!-- BOARD -->
     <div class="container">
@@ -68,7 +67,7 @@
         <div class="column-div" data-status="todo">
           <div class="column-head-div">
             <span class="dot" id="todo-dot"></span>
-            <h4 class="columnHeader">TODO (0)</h4>
+            <h4 id="todo-count" class="columnHeader">TODO (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -77,7 +76,7 @@
         <div class="column-div" data-status="doing">
           <div class="column-head-div">
             <span class="dot" id="doing-dot"></span>
-            <h4 class="columnHeader">DOING (0)</h4>
+            <h4 id="doing-count" class="columnHeader">DOING (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -86,7 +85,7 @@
         <div class="column-div" data-status="done">
           <div class="column-head-div">
             <span class="dot" id="done-dot"></span>
-            <h4 class="columnHeader">DONE (0)</h4>
+            <h4 id="done-count" class="columnHeader">DONE (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
