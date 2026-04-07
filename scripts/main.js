@@ -228,9 +228,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   const hideBtn = document.querySelector(".hide-sidebar-btn");
   const sidebar = document.querySelector(".side-bar");
+const showBtn = document.getElementById("show-sidebar-btn");
 
-  hideBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("hidden");
-  });
+hideBtn.addEventListener("click", () => {
+  sidebar.classList.add("hidden");
+  showBtn.style.display = "block";
+});
+
+showBtn.addEventListener("click", () => {
+  sidebar.classList.remove("hidden");
+  showBtn.style.display = "none";
+});
 
 });

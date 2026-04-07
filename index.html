@@ -46,6 +46,11 @@
 
   </nav>
 
+  <!--  SHOW SIDEBAR BUTTON -->
+<button id="show-sidebar-btn" class="show-sidebar-tab">
+  👀
+</button>
+
   <!-- MAIN LAYOUT -->
   <div id="layout">
 
@@ -67,7 +72,7 @@
         <div class="column-div" data-status="todo">
           <div class="column-head-div">
             <span class="dot" id="todo-dot"></span>
-            <h4 id="todo-count" class="columnHeader">TODO (0)</h4>
+            <h4 class="columnHeader">TODO (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -76,7 +81,7 @@
         <div class="column-div" data-status="doing">
           <div class="column-head-div">
             <span class="dot" id="doing-dot"></span>
-            <h4 id="doing-count" class="columnHeader">DOING (0)</h4>
+            <h4 class="columnHeader">DOING (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -85,7 +90,7 @@
         <div class="column-div" data-status="done">
           <div class="column-head-div">
             <span class="dot" id="done-dot"></span>
-            <h4 id="done-count" class="columnHeader">DONE (0)</h4>
+            <h4 class="columnHeader">DONE (0)</h4>
           </div>
           <div class="tasks-container"></div>
         </div>
@@ -105,10 +110,17 @@
       </div>
 
       <label>Title</label>
-      <input id="title-input" placeholder="e.g. Take a little break" required />
+      <input 
+        id="title-input" 
+        placeholder="e.g. Take a little break" 
+        required 
+      />
 
       <label>Description</label>
-      <textarea id="desc-input"></textarea>
+      <textarea 
+        id="desc-input"
+        placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
+      ></textarea>
 
       <label>Status</label>
       <select id="select-status">
@@ -133,12 +145,14 @@
         </button>
       </div>
 
-
       <label>Title</label>
       <input id="task-title" required />
 
       <label>Description</label>
-      <textarea id="task-desc"></textarea>
+      <textarea 
+        id="task-desc"
+        placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
+      ></textarea>
 
       <label>Status</label>
       <select id="task-status">

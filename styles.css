@@ -616,3 +616,31 @@ body.dark .toggle-circle {
 .side-bar.hidden {
   display: none;
 }
+
+.show-sidebar-tab {
+  position: fixed;
+  left: 0;
+  bottom: 40px;
+
+  width: 56px;
+  height: 48px;
+
+  background-color: #635fc7;
+  color: white;
+
+  border: none;
+  border-radius: 0 24px 24px 0;
+
+  display: none;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.show-sidebar-tab:hover {
+  background-color: #a8a4ff;
+}
+
