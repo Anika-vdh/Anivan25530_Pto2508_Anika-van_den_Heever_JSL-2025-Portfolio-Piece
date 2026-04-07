@@ -45,7 +45,7 @@ body.dark {
 .side-bar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   width: var(--sidebar-width);
   height: 100vh;             
@@ -53,18 +53,22 @@ body.dark {
 }
 
 .sidebar-bottom {
+  margin-top: auto;
   padding: 20px;
 }
 
 #side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  height: 80px;             
   display: flex;
-  justify-content: flex-start;
-}
+  align-items: center;       
+  padding-left: 24px;
+  margin: 0;    
+}             
 
 #logo {
-  width: 100%; /* Make logo responsive within container */
+  width: 140px;
 }
+
 
 .boards-nav-links-div {
   display: flex;
@@ -122,7 +126,7 @@ h4 {
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
 }
 
@@ -148,24 +152,23 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: 80px;             
+  padding: 0 24px;
+
   background-color: var(--primary-color);
   color: var(--primary-font-color);
-  height: 96px;
-  padding: 0 35px 0 30px;
+
   border-bottom: 1px solid #e4ebfa;
-  width: 100%;
-  font-size: 1.875rem;
-  font-weight: 600;
- box-sizing: border-box;
 }
 
 .header-name-div {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
-
 .logo-mobile {
-  display: none; /* Hidden on desktop; shown on smaller screens */
+  display: none; 
 }
 
 #add-new-task-btn {
@@ -209,7 +212,7 @@ header {
 .column-head-div {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between dot and column title */
+  gap: 10px; 
 }
 
 .columnHeader {
