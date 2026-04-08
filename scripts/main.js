@@ -6,25 +6,32 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   // LOAD TASKS
   // ==========================
-  let tasks = loadTasks();
+ 
 
-  if (!Array.isArray(tasks) || tasks.length === 0) {
-    tasks = [
-      { id: 1, title: "Launch Epic Career 🚀", description: "", status: "todo" },
-      { id: 2, title: "Conquer React ⚛️", description: "", status: "todo" },
-      { id: 3, title: "Understand Databases ⚙️", description: "", status: "todo" },
-      { id: 4, title: "Crush Frameworks 🖼️", description: "", status: "todo" },
-      { id: 5, title: "Master JavaScript 💛", description: "", status: "doing" },
-      { id: 6, title: "Never Give Up 🏆", description: "", status: "doing" },
-      { id: 7, title: "Explore ES6 Features 🚀", description: "", status: "done" },
-      { id: 8, title: "Have fun 🥳", description: "", status: "done" }
-    ];
+ let tasks = loadTasks();
 
-    saveTasks(tasks);
-  }
+if (!tasks || tasks.length === 0) {
+  showLoading();
 
+  fetch("https://jsl-kanban-api.vercel.app/")
+    .then(res => {
+      if (!res.ok) throw new Error("Fetch failed");
+      return res.json();
+    })
+    .then(data => {
+      tasks = data;
+      saveTasks(tasks);
+      renderTasks(tasks);
+      updateCounts(tasks);
+    })
+    .catch(() => {
+      showError();
+    });
+
+} else {
   renderTasks(tasks);
   updateCounts(tasks);
+}
 
   // ==========================
   // ADD TASK MODAL
@@ -53,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const description = document.getElementById("desc-input").value;
     const status = document.getElementById("select-status").value;
 
-    let tasks = loadTasks();
+    
 
     const newTask = {
       id: Date.now(),
@@ -106,8 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let tasks = loadTasks();
-
+    
     tasks = tasks.map(task => {
       if (task.id === currentTaskId) {
         return {
@@ -131,16 +137,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // DELETE TASK
   // ==========================
   deleteBtn.addEventListener("click", () => {
-    let tasks = loadTasks();
+  const confirmDelete = confirm("Are you sure you want to delete this task?");
 
-    tasks = tasks.filter(task => task.id !== currentTaskId);
+  if (!confirmDelete) return;
 
-    saveTasks(tasks);
-    renderTasks(tasks);
-    updateCounts(tasks);
+  tasks = tasks.filter(task => task.id !== currentTaskId);
 
-    taskModal.close();
-  });
+  saveTasks(tasks);
+  renderTasks(tasks);
+  updateCounts(tasks);
+
+  taskModal.close();
+});
+
+function showLoading() {
+  document.querySelector(".container").innerHTML =
+    "<p style='color:white; padding:20px;'>Loading tasks...</p>";
+}
+
+function showError() {
+  document.querySelector(".container").innerHTML =
+    "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
+}
 
   // ==========================
   // UPDATE COUNTS
