@@ -3,10 +3,8 @@ import { renderTasks } from "./render.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ==========================
-  // LOAD TASKS
-  // ==========================
  
+  // load tasks
 
  let tasks = loadTasks();
 
@@ -19,7 +17,7 @@ if (!tasks || tasks.length === 0) {
       return res.json();
     })
     .then(data => {
-      tasks = data;
+      tasks = data.tasks;
       saveTasks(tasks);
       renderTasks(tasks);
       updateCounts(tasks);
@@ -33,9 +31,9 @@ if (!tasks || tasks.length === 0) {
   updateCounts(tasks);
 }
 
-  // ==========================
-  // ADD TASK MODAL
-  // ==========================
+  
+  // add new task modal
+
   const addBtn = document.getElementById("add-new-task-btn");
   const newTaskModal = document.querySelector(".modal-overlay");
 
@@ -48,9 +46,9 @@ if (!tasks || tasks.length === 0) {
     newTaskModal.close();
   });
 
-  // ==========================
-  // CREATE TASK
-  // ==========================
+
+  // create task
+ 
   const newTaskForm = document.getElementById("new-task-modal-window");
 
   newTaskForm.addEventListener("submit", (e) => {
@@ -79,9 +77,9 @@ if (!tasks || tasks.length === 0) {
     newTaskModal.close();
   });
 
-  // ==========================
-  // EDIT TASK MODAL
-  // ==========================
+
+  // edit task modal
+ 
   const taskModal = document.getElementById("task-modal");
   const taskForm = document.getElementById("task-form");
 
@@ -116,9 +114,9 @@ document.addEventListener("openTask", (e) => {
     taskModal.close();
   });
 
-  // ==========================
-  // SAVE EDIT
-  // ==========================
+  
+  // save edit
+  
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -142,9 +140,9 @@ document.addEventListener("openTask", (e) => {
     taskModal.close();
   });
 
-  // ==========================
-  // DELETE TASK
-  // ==========================
+  
+  // delete task
+ 
   deleteBtn.addEventListener("click", () => {
   const confirmDelete = confirm("Are you sure you want to delete this task?");
 
@@ -159,9 +157,14 @@ document.addEventListener("openTask", (e) => {
   taskModal.close();
 });
 
+/**
+ * Displays loading state in all task columns
+ */
+
 function showLoading() {
-  const board = document.querySelector(".card-column-main");
-  board.innerHTML = "<p style='padding:20px;'>Loading tasks...</p>";
+  document.querySelectorAll(".tasks-container").forEach(container => {
+    container.innerHTML = "<p class='loading-text'>Loading...</p>";
+  });
 }
 
 /**
@@ -169,15 +172,16 @@ function showLoading() {
  */
 
 function showError() {
-  const board = document.querySelector(".card-column-main");
-  board.innerHTML = "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
+  document.querySelectorAll(".tasks-container").forEach(container => {
+    container.innerHTML = "<p class='error-text'>Error 😢</p>";
+  });
 }
 
 
 
-  // ==========================
-  // UPDATE COUNTS
-  // ==========================
+
+  // update counts
+ 
 
   /**
  * Updates column task counts
@@ -194,13 +198,15 @@ function showError() {
         `.column-div[data-status="${status}"] .columnHeader`
       );
 
-      column.textContent = `${status.toUpperCase()} (${count})`;
+      if (column) {
+  column.textContent = `${status.toUpperCase()} (${count})`;
+}
     });
   }
 
-  // ==========================
-  // THEME TOGGLE + LOGO
-  // ==========================
+  
+  // theme toggle
+ 
   const toggle = document.getElementById("theme-toggle");
   const logo = document.getElementById("logo");
 
@@ -221,9 +227,9 @@ function showError() {
       : "./assets/logo-light.svg";
   });
 
-  // ==========================
-  // SIDEBAR TOGGLE
-  // ==========================
+
+  // sidebar toggle
+
   const hideBtn = document.querySelector(".hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
   const sidebar = document.querySelector(".side-bar");

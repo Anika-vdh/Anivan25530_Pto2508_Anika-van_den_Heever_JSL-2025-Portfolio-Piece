@@ -12,7 +12,10 @@ export function renderTasks(tasks) {
   tasks.forEach(task => {
     const div = document.createElement("div");
     div.className = "task-div";
-    div.textContent = task.title;
+    div.innerHTML = `
+    <strong>${task.title}</strong>
+    ${task.description ? `<small>${task.description}</small>` : ""}
+`;
 
     // OPEN MODAL ON CLICK
     div.addEventListener("click", () => {

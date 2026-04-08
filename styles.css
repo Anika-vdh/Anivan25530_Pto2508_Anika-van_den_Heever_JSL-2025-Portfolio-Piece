@@ -2,7 +2,7 @@
    Global & Root Variables
 ======================== */
 * {
-  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+  box-sizing: border-box; 
 }
 
 :root {
@@ -10,8 +10,8 @@
   --secondary-color: #f4f7fd;
   --primary-font-color: #000000;
   --secondary-font-color: #828fa3;
-  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
-  --sidebar-width: 300px; /* Sidebar fixed width */
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); 
+  --sidebar-width: 300px; 
 }
 
 /* ================
@@ -19,13 +19,13 @@
 ================ */
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  display: flex; /* Allow layout to span horizontally */
+  display: flex; 
   flex-direction: row;
   width: 100%;
   min-height: 100vh;
   margin: 0;
   background-color: var(--secondary-color);
-  font-size: 1rem; /* Base font size for rem scaling */
+  font-size: 1rem;
 }
 
 ::placeholder {
@@ -39,7 +39,7 @@ body.dark {
   --primary-font-color: #ffffff;
 }
 
-/* ================
+/* ===============
    Sidebar Layout
 ================ */
 .side-bar {
@@ -77,7 +77,7 @@ body.dark {
 }
 
 #headline-sidepanel {
-  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+  padding: 0 12px 0 50px; 
 }
 
 h4 {
@@ -196,14 +196,14 @@ header {
 .container {
   display: flex;
   flex-direction: column;
-  padding: 24px; 
+  padding: 20px; 
   box-sizing: border-box;
 }
 
 .card-column-main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .column-div {
@@ -254,10 +254,12 @@ header {
 }
 .task-div {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
 
   padding: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   background-color: var(--primary-color);
   color: var(--primary-font-color);
@@ -270,6 +272,11 @@ header {
   font-weight: bold;
 
   transition: 0.2s ease;
+}
+
+.task-div small {
+  font-size: 12px;
+  color: #828fa3;
 }
 
 .task-div:hover {
@@ -615,4 +622,13 @@ body.dark .theme-toggle-container {
   #mobile-menu-btn {
     display: block;
   }
+}
+
+.error-text {
+  color: red;
+  padding: 20px;
+}
+
+.loading-text {
+  padding: 20px;
 }
