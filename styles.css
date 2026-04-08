@@ -315,7 +315,8 @@ dialog {
   max-width: 480px; 
   padding: 24px;
 
-  background-color: #fff;
+  background-color: var(--primary-color);
+color: var(--primary-font-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -324,7 +325,8 @@ dialog {
   flex-direction: column;
   gap: 20px;
 
-  background-color: white;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
   padding: 24px;
   border-radius: 8px;
 
