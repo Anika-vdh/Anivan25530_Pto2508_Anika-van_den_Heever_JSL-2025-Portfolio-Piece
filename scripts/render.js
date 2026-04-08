@@ -11,9 +11,9 @@ export function renderTasks(tasks) {
 
     // OPEN MODAL ON CLICK
     div.addEventListener("click", () => {
-      if (window.openModal) {
-        window.openModal(task);
-      }
+     if (window.openModal) {
+    window.openModal(task);
+    }
     });
 
     // Find correct column

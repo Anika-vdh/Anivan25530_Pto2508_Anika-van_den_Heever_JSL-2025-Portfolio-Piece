@@ -93,15 +93,17 @@ if (!tasks || tasks.length === 0) {
 
   let currentTaskId = null;
 
-  window.openModal = function (task) {
-    currentTaskId = task.id;
+function openModal(task) {
+  currentTaskId = task.id;
 
-    taskTitle.value = task.title;
-    taskDesc.value = task.description || "";
-    taskStatus.value = task.status;
+  taskTitle.value = task.title;
+  taskDesc.value = task.description || "";
+  taskStatus.value = task.status;
 
-    taskModal.showModal();
-  };
+  taskModal.showModal();
+}
+
+window.openModal = openModal;
 
   closeModalBtn.addEventListener("click", () => {
     taskModal.close();

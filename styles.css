@@ -477,6 +477,9 @@ select {
   cursor: pointer;
   font-size: 18px;
   z-index: 1000;
+
+  border: none;        
+  outline: none;       
 }
 
 
