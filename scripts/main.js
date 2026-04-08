@@ -93,6 +93,10 @@ if (!tasks || tasks.length === 0) {
 
   let currentTaskId = null;
 
+  /**
+ * Opens edit modal 
+ * @param {Object} task - Task object
+ */
 function openModal(task) {
   currentTaskId = task.id;
 
@@ -160,19 +164,26 @@ function showLoading() {
   board.innerHTML = "<p style='padding:20px;'>Loading tasks...</p>";
 }
 
+/**
+ * Displays error message if fetch fails
+ */
+
 function showError() {
   const board = document.querySelector(".card-column-main");
   board.innerHTML = "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
 }
 
-/**
- * Updates displayed task count for columns
- * @param {Array} tasks - Array of task objects
- */
+
 
   // ==========================
   // UPDATE COUNTS
   // ==========================
+
+  /**
+ * Updates column task counts
+ * @param {Array} tasks - Array of task objects
+ */
+
   function updateCounts(tasks) {
     const statuses = ["todo", "doing", "done"];
 
