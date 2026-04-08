@@ -103,7 +103,10 @@ function openModal(task) {
   taskModal.showModal();
 }
 
-window.openModal = openModal;
+document.addEventListener("openTask", (e) => {
+  openModal(e.detail);
+});
+
 
   closeModalBtn.addEventListener("click", () => {
     taskModal.close();
@@ -153,13 +156,13 @@ window.openModal = openModal;
 });
 
 function showLoading() {
-  document.querySelector(".container").innerHTML =
-    "<p style='color:white; padding:20px;'>Loading tasks...</p>";
+  const board = document.querySelector(".card-column-main");
+  board.innerHTML = "<p style='padding:20px;'>Loading tasks...</p>";
 }
 
 function showError() {
-  document.querySelector(".container").innerHTML =
-    "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
+  const board = document.querySelector(".card-column-main");
+  board.innerHTML = "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
 }
 
 /**
@@ -223,11 +226,10 @@ function showError() {
     sidebar.classList.remove("hidden");
     showBtn.style.display = "none";
   });
-
-});
-
 const mobileMenuBtn = document.getElementById("mobile-menu-btn");
 
 mobileMenuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("hidden");
 });
+});
+

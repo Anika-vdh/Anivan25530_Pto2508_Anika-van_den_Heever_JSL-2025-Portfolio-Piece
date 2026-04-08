@@ -167,6 +167,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1; 
 }
 .logo-mobile {
   display: none; 
@@ -182,6 +183,7 @@ header {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s ease;
+  
 }
 
 #add-new-task-btn:hover {
@@ -606,6 +608,7 @@ body.dark .theme-toggle-container {
   cursor: pointer;
   display: none;
   color: var(--primary-font-color);
+  margin-right: 8px;
 }
 
 @media (max-width: 768px) {
