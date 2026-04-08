@@ -594,3 +594,22 @@ body.dark .theme-toggle-container {
     max-width: 90%;
   }
 }
+
+/* ==========================
+   MOBILE MENU BUTTON
+========================== */
+
+#mobile-menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  color: var(--primary-font-color);
+}
+
+@media (max-width: 768px) {
+  #mobile-menu-btn {
+    display: block;
+  }
+}

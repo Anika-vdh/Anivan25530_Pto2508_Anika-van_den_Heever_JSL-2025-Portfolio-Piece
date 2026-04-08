@@ -1,3 +1,8 @@
+/**
+ * Renders all tasks columns
+ * @param {Array} tasks 
+ */
+
 export function renderTasks(tasks) {
  
   document.querySelectorAll(".tasks-container").forEach(container => {

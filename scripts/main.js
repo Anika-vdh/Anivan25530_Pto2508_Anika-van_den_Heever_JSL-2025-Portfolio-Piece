@@ -162,6 +162,11 @@ function showError() {
     "<p style='color:red; padding:20px;'>Error loading tasks 😢</p>";
 }
 
+/**
+ * Updates displayed task count for columns
+ * @param {Array} tasks - Array of task objects
+ */
+
   // ==========================
   // UPDATE COUNTS
   // ==========================
@@ -219,4 +224,10 @@ function showError() {
     showBtn.style.display = "none";
   });
 
+});
+
+const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+
+mobileMenuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("hidden");
 });
