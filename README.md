@@ -4,6 +4,14 @@
 
 This project involves **deploying a Kanban app to Netlify**, ensuring the app's functionality and persistence through local storage, and implementing dynamic features such as task editing, deletion, sidebar interaction, and a theme toggle. The goal is to deliver a fully functional, deployable application that is responsive across devices and maintains data consistency. Students will also focus on **clean, modular code** that is well-documented for future development.
 
+## 🌐 Live Project
+
+https://your-netlify-link.netlify.app/
+
+## 🎥 Presentation
+
+https://www.loom.com/share/591a2b240b804e539c84ecbca0bce469
+
 ## WHAT to Submit
 
 - **JSLPP GitHub Repo**: Your JSLPP GitHub repository

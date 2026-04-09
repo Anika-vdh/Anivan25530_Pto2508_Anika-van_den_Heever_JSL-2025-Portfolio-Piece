@@ -177,9 +177,6 @@ function showError() {
   });
 }
 
-
-
-
   // update counts
  
 

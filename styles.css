@@ -1,6 +1,6 @@
-/* ========================
-   Global & Root Variables
-======================== */
+/* Kanban board styles */
+
+/* Global variables */
 * {
   box-sizing: border-box; 
 }
@@ -14,9 +14,7 @@
   --sidebar-width: 300px; 
 }
 
-/* ================
-   Base Elements
-================ */
+/* Base Elements */
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
   display: flex; 
@@ -39,9 +37,7 @@ body.dark {
   --primary-font-color: #ffffff;
 }
 
-/* ===============
-   Sidebar Layout
-================ */
+/*Sidebar Layout */
 .side-bar {
   display: flex;
   flex-direction: column;
@@ -68,7 +64,6 @@ body.dark {
 #logo {
   width: 140px;
 }
-
 
 .boards-nav-links-div {
   display: flex;
@@ -104,9 +99,7 @@ h4 {
   overflow: hidden; 
 }
 
-/* ==========================
-   HIDE SIDEBAR BUTTON
-========================== */
+/*HIDE SIDEBAR BUTTON */
 .hide-sidebar-btn {
   width: 100%;
   margin-top: 15px;
@@ -135,20 +128,14 @@ h4 {
   background-color: #e4ebfa;
 }
 
-/* ===============
-   Main Layout
-================ */
+/*Main Layout*/
 #layout {
   flex: 1; 
   overflow-x: hidden; 
   width: 100%;
 }
 
-
-
-/* ===============
-   Header Section
-================ */
+/*Header Section */
 header {
   display: flex;
   align-items: center;
@@ -169,6 +156,21 @@ header {
   gap: 12px;
   flex: 1; 
 }
+
+@media (max-width: 768px) {
+  header {
+    justify-content: space-between;
+  }
+
+  .header-name-div {
+    flex: unset;
+  }
+
+  #header-board-name {
+    font-size: 18px;
+  }
+}
+
 .logo-mobile {
   display: none; 
 }
@@ -183,16 +185,13 @@ header {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s ease;
-  
 }
 
 #add-new-task-btn:hover {
   background-color: #a8a4ff;
 }
 
-/* ===============
-   Board Columns
-================ */
+/*Board Columns*/
 .container {
   display: flex;
   flex-direction: column;
@@ -245,13 +244,12 @@ header {
   background-color: #219c90;
 }
 
-/* ===============
-   Task Cards
-================ */
+/*Task Cards */
 .tasks-container {
   display: flex;
   flex-direction: column;
 }
+
 .task-div {
   display: flex;
   align-items: flex-start;
@@ -288,17 +286,13 @@ body.dark .task-div {
   color: white;
 }
 
-/* ===============
-   Headings
-================ */
+/*Headings */
 h2 {
   font-size: 1.5rem;
   margin: 0;
 }
 
-/* ===============
-   Modal Styles
-================ */
+/*Modal Styles */
 
 dialog {
   position: fixed;
@@ -309,7 +303,6 @@ dialog {
   background: none;
 }
 
-/* Style the modal box */
 #task-modal::backdrop {
   background: rgba(0, 0, 0, 0.3);
 }
@@ -325,7 +318,8 @@ dialog {
   padding: 24px;
 
   background-color: var(--primary-color);
-color: var(--primary-font-color);
+  color: var(--primary-font-color);
+
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -357,10 +351,10 @@ color: var(--primary-font-color);
 .modal-overlay::backdrop {
   background: rgba(0, 0, 0, 0.4);
 }
+
 .submit-btn {
   width: 100%;
   padding: 15px;                 
-  
   background-color: #635fc7;     
   color: white;
 
@@ -449,6 +443,7 @@ form label {
   margin-bottom: 6px;
   color: #828fa3;
 }
+
 input:not(.submit-btn),
 textarea,
 select {
@@ -463,13 +458,10 @@ select {
   width: 100%;
 }
 
-
-
 .side-bar.hidden {
   transform: translateX(-100%);
   position: absolute;
 }
-
 
 .show-sidebar-tab {
   position: fixed;
@@ -491,15 +483,7 @@ select {
   outline: none;       
 }
 
-
-
-body.dark .toggle-circle {
-  left: 23px;
-}
-
-/* ==========================
-   THEME TOGGLE 
-========================== */
+/*THEME TOGGLE */
 
 .theme-toggle {
   width: 40px;
@@ -510,7 +494,6 @@ body.dark .toggle-circle {
   cursor: pointer;
 }
 
-/* circle */
 .toggle-circle {
   width: 14px;
   height: 14px;
@@ -522,7 +505,6 @@ body.dark .toggle-circle {
   transition: 0.3s;
 }
 
-/* dark mode */
 body.dark .theme-toggle {
   background-color: #635fc7;
 }
@@ -530,7 +512,6 @@ body.dark .theme-toggle {
 body.dark .toggle-circle {
   left: 23px;
 }
-
 
 body.dark .hide-sidebar-btn {
   background-color: #635fc7;
@@ -541,9 +522,7 @@ body.dark .hide-sidebar-btn:hover {
   background-color: #a8a4ff;
 }
 
-/* ==========================
-   TOGGLE LAYOUT 
-========================== */
+/* TOGGLE LAYOUT  */
 
 .theme-toggle-container {
   display: flex;
@@ -560,53 +539,63 @@ body.dark .theme-toggle-container {
   background-color: #20212c;
 }
 
-/* ==========================
-   MOBILE RESPONSIVENESS
-========================== */
+/*MOBILE RESPONSIVENESS */
 
 @media (max-width: 768px) {
 
-  /* Stack columns */
   .card-column-main {
     grid-template-columns: 1fr;
   }
 
-  /* Sidebar becomes overlay */
   .side-bar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    z-index: 1000;
+    width: 90%;
+    max-width: 300px;
+    left: 50%;
+    top: 80px;
+    transform: translate(-50%, -150%);
+    border-radius: 8px;
   }
 
-  /* Show mobile logo */
+  .side-bar.active {
+    transform: translate(-50%, 0);
+  }
+
   .logo-mobile {
     display: block;
     width: 24px;
   }
 
-  /* Smaller header spacing */
   header {
     padding: 0 16px;
   }
 
-  /* Button smaller */
-  #add-new-task-btn {
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-
-  /* Modal spacing */
   .modal-window {
     width: 90%;
     max-width: 90%;
   }
+
+  #add-new-task-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #add-new-task-btn::after {
+    content: "+";
+    font-size: 24px;
+  }
+
+  #mobile-menu-btn {
+    display: block;
+  }
 }
 
-/* ==========================
-   MOBILE MENU BUTTON
-========================== */
+/*MOBILE MENU BUTTON */
 
 #mobile-menu-btn {
   background: none;
@@ -616,12 +605,6 @@ body.dark .theme-toggle-container {
   display: none;
   color: var(--primary-font-color);
   margin-right: 8px;
-}
-
-@media (max-width: 768px) {
-  #mobile-menu-btn {
-    display: block;
-  }
 }
 
 .error-text {
