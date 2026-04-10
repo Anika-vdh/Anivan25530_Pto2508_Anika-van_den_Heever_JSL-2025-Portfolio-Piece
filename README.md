@@ -6,7 +6,7 @@ This project involves **deploying a Kanban app to Netlify**, ensuring the app's 
 
 ## 🌐 Live Project
 
-https://adorable-gelato-74a43b.netlify.app/
+https://jsl-portfolioproject-anivan25530.netlify.app/
 
 ## 🎥 Presentation
 
