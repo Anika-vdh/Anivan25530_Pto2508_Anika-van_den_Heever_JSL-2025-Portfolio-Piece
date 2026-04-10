@@ -12,7 +12,7 @@ export function renderTasks(tasks) {
   tasks.forEach(task => {
     const div = document.createElement("div");
     div.className = "task-div";
-    div.textContent = task.title;
+   div.textContent = task.title;
   
   
     // open modal on click
