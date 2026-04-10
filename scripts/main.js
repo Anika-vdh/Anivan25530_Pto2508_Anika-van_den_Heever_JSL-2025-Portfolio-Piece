@@ -98,7 +98,7 @@ setupModal(tasks, saveTasks, renderTasks, updateCounts);
 
   hideBtn.addEventListener("click", () => {
     sidebar.classList.add("hidden");
-    showBtn.style.display = "block";
+    showBtn.style.display = "flex";
   });
 
   showBtn.addEventListener("click", () => {

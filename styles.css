@@ -476,7 +476,7 @@ select {
   width: 56px;
   height: 48px;
 
-  display: flex; 
+  display: none; 
   
   justify-content: center;
   align-items: center;
